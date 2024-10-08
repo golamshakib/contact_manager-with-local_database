@@ -58,57 +58,59 @@ class _HomePageState extends State<HomePage> {
         child: const Icon(Icons.add),
       ),
       body: Consumer<ContactProvider>(
-        builder: (context, provider, child) => ListView.builder(
-          itemCount: provider.contactList.length,
-          itemBuilder: (context, index) {
-            final ContactModel contact = provider.contactList[index];
-            return Dismissible(
-              key: UniqueKey(),
-              direction: DismissDirection.endToStart,
-              background: Container(
-                alignment: Alignment.centerRight,
-                color: Colors.red,
-                padding: const EdgeInsets.only(right: 20.0),
-                child: const Icon(
-                  Icons.delete,
-                  color: Colors.white,
-                ),
-              ),
-              onDismissed: (_) {
-                provider.deleteContact(contact.id!);
-              },
-              confirmDismiss: (_) {
-                return showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                          title: Text('Delete ${contact.firstName}?'),
-                          content: const Text(
-                              'This contact will be permanently delete from your device'),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context, false);
-                              },
-                              child: const Text('Cancel'),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context, true);
-                              },
-                              child: const Text('Delete'),
-                            ),
-                          ],
-                        ));
-              },
-              child: ContactItemView(
-                contact: contact,
-                onFavBtnClicked: () {
-                  provider.showUpdateFavorite(contact);
+        builder: (context, provider, child) => provider.contactList.isEmpty
+            ? const Center(child: Text('Contact not found', style: TextStyle(fontSize: 16.0),))
+            : ListView.builder(
+                itemCount: provider.contactList.length,
+                itemBuilder: (context, index) {
+                  final ContactModel contact = provider.contactList[index];
+                  return Dismissible(
+                    key: UniqueKey(),
+                    direction: DismissDirection.endToStart,
+                    background: Container(
+                      alignment: Alignment.centerRight,
+                      color: Colors.red,
+                      padding: const EdgeInsets.only(right: 20.0),
+                      child: const Icon(
+                        Icons.delete,
+                        color: Colors.white,
+                      ),
+                    ),
+                    onDismissed: (_) {
+                      provider.deleteContact(contact.id!);
+                    },
+                    confirmDismiss: (_) {
+                      return showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                                title: Text('Delete ${contact.firstName}?'),
+                                content: const Text(
+                                    'This contact will be permanently delete from your device'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context, false);
+                                    },
+                                    child: const Text('Cancel'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context, true);
+                                    },
+                                    child: const Text('Delete'),
+                                  ),
+                                ],
+                              ));
+                    },
+                    child: ContactItemView(
+                      contact: contact,
+                      onFavBtnClicked: () {
+                        provider.showUpdateFavorite(contact);
+                      },
+                    ),
+                  );
                 },
               ),
-            );
-          },
-        ),
       ),
     );
   }
