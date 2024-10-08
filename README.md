@@ -18,10 +18,8 @@ This is a **Flutter Contact Management App** designed to store, display, and man
 
 ## Screenshots
 
-**Home Page**
-![home](https://github.com/user-attachments/assets/28db480a-e667-4a92-ae40-207cfc13abc5)
-**Create New Contact Page**
-![create_contact](https://github.com/user-attachments/assets/7fb54684-6503-497f-a2e9-8ba9f68238c2)
+![CM_(H,CC)](https://github.com/user-attachments/assets/9763bf7f-1233-4af1-98df-99018216ceff)
+![CM_(F,D,U,D)](https://github.com/user-attachments/assets/1f505444-8be8-49ba-8d80-04e6e185c5b5)
 
 
 ## Getting Started
